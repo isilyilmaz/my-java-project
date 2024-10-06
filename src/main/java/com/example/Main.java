@@ -1,17 +1,25 @@
-package com.example;
+package com.example.bankingsystem;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.example.bankingsystem.enums.Gender;
+import com.example.bankingsystem.enums.TransactionCode;
+import com.example.bankingsystem.repositories.TransactionRepository;
+import com.example.bankingsystem.services.BankingService;
+
+import java.util.Date;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        BankingService service = new BankingService();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        // Add a customer
+        service.addCustomer("Alice", "Smith", new Date(800000000000L), Gender.FEMALE, "alice.smith@example.com", "456 Maple St.");
+
+        // Add a card
+        service.addCard(1, "1111-2222-3333-4444", "MasterCard", 10000.0);
+
+        // Add a transaction
+        service.addTransaction("1111-2222-3333-4444", TransactionCode.CODE_BUY, 500.0, new Date());
+
+        // Other operations...
     }
 }
