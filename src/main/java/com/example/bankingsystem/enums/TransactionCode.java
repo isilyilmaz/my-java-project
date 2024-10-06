@@ -1,5 +1,7 @@
 package com.example.bankingsystem.enums;
 
+import com.example.bankingsystem.repositories.TransactionRepository;
+
 public enum TransactionCode {
     CODE_BUY("05"),
     CODE_REFUND_OF_SELL("06"),
@@ -24,9 +26,9 @@ public enum TransactionCode {
         return code;
     }
 
-    public static boolean isValidCode(String code) {
+    public static boolean isValidCode(TransactionCode code) {
         for (TransactionCode transactionCode : TransactionCode.values()) {
-            if (transactionCode.getCode().equals(code)) {
+            if (transactionCode.getCode().equals(code.getCode())) {
                 return true;
             }
         }
