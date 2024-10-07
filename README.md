@@ -9,6 +9,7 @@ Project Requirements:
 
 Project:
 *   Using the Generic Repository Pattern will help make the project more scalable, maintainable, and aligned with the principles of Object-Oriented Programming (OOP).
+  
                              BankingSystemProject
                            └── src
                                └── main
