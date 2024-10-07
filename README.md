@@ -1,4 +1,4 @@
-# my-java-project-to-kotlin
+# my-java-project
 
 Project Requirements:
 1. Checking git version
