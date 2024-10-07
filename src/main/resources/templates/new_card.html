@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add New Card</title>
+</head>
+<body>
+<h2>Add New Card</h2>
+<form action="/cards/save" method="post">
+  <label>Card No:</label> <input type="text" name="cardNo"/><br/>
+  <label>Card Type:</label> <input type="text" name="cardType"/><br/>
+  <label>Card Limit:</label> <input type="number" name="cardLimit"/><br/>
+  <input type="submit" value="Save"/>
+</form>
+<a href="/cards">Back to Card List</a>
+</body>
+</html>

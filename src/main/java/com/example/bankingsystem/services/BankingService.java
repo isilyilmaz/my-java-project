@@ -11,7 +11,9 @@ import com.example.bankingsystem.repositories.CardRepository;
 import com.example.bankingsystem.repositories.TransactionRepository;
 import com.example.bankingsystem.utils.IDGenerator;
 
-import java.util.*;
+import java.sql.SQLException;
+import java.sql.Date;
+import java.util.List;
 
 public class BankingService {
     private CustomerRepository customerRepository = new CustomerRepository();
@@ -20,33 +22,33 @@ public class BankingService {
 
     // Add Customer
     public void addCustomer(String name, String surname, Date birthDate, Gender gender, String email, String address) {
-        Customer customer = new Customer(IDGenerator.generateCustomerId(), name, surname, birthDate, gender, email, address);
+        Customer customer = new Customer(IDGenerator.generateCustomerId(), name, surname, birthDate, gender, email, address,null,null);
         customerRepository.add(customer);
     }
 
     // Add Card
-    public void addCard(int customerId, String cardNo, CardType cardType, double limit) {
+    public void addCard(int customerId, String cardNo, CardType cardType, Date expirationDate,double limit) {
 
         if (customerRepository.getById(customerId).isPresent()) {
-            Card card = new Card(IDGenerator.generateCardId(), customerId, cardNo, cardType, limit);
+            Card card = new Card(IDGenerator.generateCardId(), customerId, cardNo, cardType, expirationDate,limit,null,null);
             cardRepository.add(card);
         }
     }
 
     // Add Transaction
-    public void addTransaction(String cardNo, TransactionCode transactionCode, double amount, Date date) {
+    public void addTransaction(String cardNo, TransactionCode transactionCode, double amount, Date date) throws SQLException {
         Card cardObject = null;
         if (!TransactionCode.isValidCode(transactionCode))
             throw new IllegalArgumentException("TransactionCode("+transactionCode.getCode()+") is invalid.");
 
-         if(cardRepository.findByCardNo(cardNo).isPresent())
-             cardObject = cardRepository.findByCardNo(cardNo).get();
+         if(cardRepository.findByCardNo(cardNo)!=null)
+             cardObject = cardRepository.findByCardNo(cardNo);
          else
              throw new IllegalArgumentException("CardNo("+cardNo+") isn't found in Card Lists.");
 
          if((cardObject != null) && customerRepository.getById(cardObject.getCustomerId()).isPresent())
         {
-            Transaction transaction = new Transaction(IDGenerator.generateTransactionId(),cardNo, transactionCode, amount, date);
+            Transaction transaction = new Transaction(IDGenerator.generateTransactionId(),cardNo, transactionCode, amount, date,null,null);
             transactionRepository.add(transaction);
         }
          else
@@ -68,7 +70,7 @@ public class BankingService {
     // Other service methods...
 
     // Search card by card number
-    public Optional<Card> searchCardByNumber(String cardNo) {
+    public Card searchCardByNumber(String cardNo) throws SQLException {
         return cardRepository.findByCardNo(cardNo);
     }
 

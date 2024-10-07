@@ -2,7 +2,8 @@ package com.example.bankingsystem.models;
 
 import com.example.bankingsystem.enums.CardType;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,16 +12,18 @@ public class Card extends BaseEntity {
     private int customerId;
     private String cardNo;
     private CardType cardType;
+    private Date expirationDate;
     private double cardLimit;
 
     // Regular expression pattern for email validation
     private static final String CARD_NO_REGEX = "^[4-9][0-9]+$";
 
-    public Card(int id, int customerId,String cardNo, CardType cardType, double cardLimit) {
-        this.id = id;
+    public Card(int id, int customerId, String cardNo, CardType cardType, Date expiration_date,double cardLimit, Timestamp createdAt, Timestamp updatedAt) {
+        super(id, createdAt, updatedAt);
         this.customerId=customerId;
         this.cardNo = validateCardNo(cardNo);
         this.cardType = cardType;
+        this.expirationDate = expiration_date;
         this.cardLimit = cardLimit;
     }
 
@@ -33,6 +36,18 @@ public class Card extends BaseEntity {
 
     public int getCustomerId() {
         return customerId;
+    }
+
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public double getCardLimit() {
+        return cardLimit;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
     }
 
     private String validateCardNo(String cardNo) {

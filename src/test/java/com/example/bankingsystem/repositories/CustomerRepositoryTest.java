@@ -20,14 +20,14 @@ class CustomerRepositoryTest {
 
     @Test
     void testAddCustomer() {
-        Customer customer = new Customer(1, "Alice", "Smith", new Date(116,4,29), Gender.FEMALE, "alice@example.com", "456 Maple St.");
+        Customer customer = new Customer(1, "Alice", "Smith", new Date(116,4,29), Gender.CODE_FEMALE, "alice@example.com", "456 Maple St.",null,null);
         customerRepository.add(customer);
         assertEquals(1, customerRepository.getAll().size());
     }
 
     @Test
     void testGetCustomerById() {
-        Customer customer = new Customer(1, "Alice", "Smith", new Date(115,3,15), Gender.FEMALE, "alice@example.com", "456 Maple St.");
+        Customer customer = new Customer(1, "Alice", "Smith", new Date(115,3,15), Gender.CODE_FEMALE, "alice@example.com", "456 Maple St.",null,null);
         customerRepository.add(customer);
         Optional<Customer> retrievedCustomer = customerRepository.getById(1);
         assertTrue(retrievedCustomer.isPresent());
@@ -36,7 +36,7 @@ class CustomerRepositoryTest {
 
     @Test
     void testDeleteCustomer() {
-        Customer customer = new Customer(1, "Alice", "Smith", new Date(94,6,9), Gender.FEMALE, "alice@example.com", "456 Maple St.");
+        Customer customer = new Customer(1, "Alice", "Smith", new Date(94,6,9), Gender.CODE_FEMALE, "alice@example.com", "456 Maple St.",null,null);
         customerRepository.add(customer);
         customerRepository.delete(1);
         assertEquals(0, customerRepository.getAll().size());

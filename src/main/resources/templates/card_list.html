@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Card List</title>
+</head>
+<body>
+<h2>Card Management</h2>
+<table border="1">
+    <tr>
+        <th>Card Number</th>
+        <th>Card Type</th>
+        <th>Card Limit</th>
+    </tr>
+    <tr th:each="card : ${cards}">
+        <td th:text="${card.cardNo}">Card Number</td>
+        <td th:text="${card.cardType}">Card Type</td>
+        <td th:text="${card.cardLimit}">Card Limit</td>
+    </tr>
+</table>
+<a href="/cards/new">Add New Card</a>
+</body>
+</html>

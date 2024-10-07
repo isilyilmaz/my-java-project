@@ -2,6 +2,7 @@ package com.example.bankingsystem.models;
 
 import com.example.bankingsystem.enums.Gender;
 
+import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Date;
@@ -17,8 +18,8 @@ public class Customer extends BaseEntity {
     // Regular expression pattern for email validation
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
 
-    public Customer(int id, String name, String surname, Date birthDate, Gender gender, String email, String address) {
-        this.id = id;
+    public Customer(int id, String name, String surname, Date birthDate, Gender gender, String email, String address, Timestamp createdAt, Timestamp updatedAt) {
+        super(id, createdAt, updatedAt);
         this.name = name;
         this.surname = surname;
         this.birthDate = validateBirthDate(birthDate);
@@ -47,6 +48,10 @@ public class Customer extends BaseEntity {
 
     public String getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     private String validateEmail(String email) {
@@ -78,5 +83,6 @@ public class Customer extends BaseEntity {
         }
         return birthDate;
     }
+
 
 }
